@@ -1,0 +1,24 @@
+pragma solidity ^0.8.17;
+
+contract student{
+    int public stdCount=0;
+    struct Student{
+        int id;
+        string fname;
+        string iname;
+        int marks;
+    }
+    address owner;
+    modifier onlyOwner{
+        require(owner==msg.sender);
+        _;
+    }
+    constructor(){
+        owner = msg.sender;
+    }
+    function registerStudent(int _id, string memory _fname, string memory _iname, int _marks) public onlyOwner{
+        stdCount=stdCount+1;
+    }
+    fallback() external{
+    }
+}
