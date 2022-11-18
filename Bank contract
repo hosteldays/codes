@@ -1,0 +1,16 @@
+pragma solidity ^0.8.17;
+
+contract bank{
+    address payable owner;
+    function tipjar()public payable{
+        owner = payable(msg.sender);
+    }
+    mapping (address=>uint256)public balanceOf;
+    function deposit(uint256 amount)public payable{
+        balanceOf[msg.sender]+= amount;
+    }
+    function withdraw(uint256 amount) public payable{
+        balanceOf[msg.sender]-= amount;
+        payable(msg.sender).transfer(address(this).balance);
+    }
+}
